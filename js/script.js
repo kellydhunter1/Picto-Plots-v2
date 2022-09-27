@@ -3,6 +3,7 @@ const pixKey = "17228303-ec297062a3db99e52d960db51";
 const omdbKey = "da7317ce";
 let plotUrl= "";
 
+
 // array of objects with information about movie
 const moviesArr = [
     {title: "Mean Girls", plot: plotUrl, picWords: ["teen girl","group of barbies","besties","dating","mad"]},
@@ -16,11 +17,23 @@ const moviesArr = [
     // {title: "", plot: plotUrl, picWords: []},
     {title: "Alice in Wonderland", plot: plotUrl, picWords: ["rabbit hole", "magic","tea party", "slay dragon", "goodbye"]}
 ];
+const btnEl = document.getElementById("btnEl");
+
+
+
+// Randomize Movie Array
+const chooseMovie = function() {
+    moviesArr.sort(function(){
+        return 0.5 - Math.random()
+    }) 
+    console.log(moviesArr[0].title)
+    getPlot();
+    createButtons();
+};
 
 // Create buttons with each movie title in regular order
-const createBtns = function() {
+const createButtons = function() {
     moviesArr.forEach((movie) => {
-        const btnEl = document.getElementById("btnEl");
         const movieBtn = document.createElement("button");
         movieBtn.className = "btn btn-secondary";
         movieBtn.setAttribute("type", "button");
@@ -29,19 +42,9 @@ const createBtns = function() {
     })
 }
 
-// Randomize Movie Array
-const chooseMovie = function() {
-    moviesArr.sort(function(){
-    return 0.5 - Math.random()
-}) 
-    console.log(moviesArr[0]);
-};
-
 // uses OMDb to get plot of movie, currently defaulted to mean girls
-const findPlot = function() { 
-    chooseMovie();
-    let movie = moviesArr[0].title;
-    console.log(movie);
+const getPlot = function() { 
+let movie= moviesArr[0].title;
     fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${omdbKey}&t=${movie}&plot=short`)
     .then((response) => response.json())
     .then((data) => console.log(data.Plot))
@@ -50,8 +53,7 @@ const findPlot = function() {
 };
 // uses pix strings to search photos from pixabay
 const getPix = function() {
-    let pixArr = moviesArr[0].picWords;        
-    let idCounter = 0;
+    let pixArr = moviesArr[0].picWords;
     console.log(pixArr);
     for(let pic of pixArr) {
             // use API to get each picture described in array
@@ -73,7 +75,7 @@ const getPix = function() {
                     setTimeout(function() {
                        console.log(`next pic will append after ${pic}`);
                        resolve();
-                    }, 4000);
+                    }, 8000);
                   })
             })                
             .catch((error) => console.error(error.message));
@@ -85,10 +87,18 @@ const getPix = function() {
 
 };
 
+const checkAnswer = function(event) {
+    let ansClick = event.target;
+    event.preventDefault;
+    console.log(`${moviesArr[0].title} is in answer checker.`)
+    
+    if (ansClick.innerText == moviesArr[0].title) {
+        console.log("Right Answer!")
+    } else {
+        console.log("Thats Wrong!")
+    }
+}
 
+chooseMovie();
 
-
-createBtns();
-findPlot();
-
-
+btnEl.addEventListener("click", checkAnswer); 
