@@ -36,15 +36,9 @@ const createButtons = function() {
     moviesArr.forEach((movie) => {
         // create buttons
         const movieBtn = document.createElement("button");
-        movieBtn.className = "col-lg-2 col-md-3 col-sm-mx btn btn-secondary";
+        movieBtn.className = "col-lg-2 col-md-3 col-sm-5 btn btn-secondary shadow p-1 m-1 rounded";
         movieBtn.setAttribute("type", "button");
         movieBtn.textContent = movie.title;
-        // create container for buttons
-        // const btnDiv = document.createElement("div");
-        // btnDiv.className = "col col-lg-4"
-        // put buttons in container and on the page
-        // btnDiv.appendChild(movieBtn);
-        // btnEl.appendChild(btnDiv);
         btnEl.appendChild(movieBtn);
     })
 };
@@ -84,7 +78,8 @@ const getPix = function() {
                 const picImg = document.createElement("img");
 
                 // set attributes for pictures
-                picImg.setAttribute("class", "img-thumbnail col");
+                // no idea why I can't use classname?
+                picImg.setAttribute("class", "img-thumbnail shadow-none col");
                 picImg.setAttribute("src", data.hits[0].previewURL);
                 picImg.setAttribute("alt", pic);
                 picImg.setAttribute("title", pic);

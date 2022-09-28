@@ -5,37 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css" />
 
     <title>Picto-Plots</title>
 </head>
 <body>
-    <div class="container">
-    <h1>Hey! Come play my game!</h1>
-    <div class="container card">
-        <div class="align-content-center justify-content-betweenrow d-grid d-flex flex-wrap gap-1 card-img-top" id="pixEl"></div>
-       
-        <!-- directions -->
-        <h2 class="card-title"></h2>
-        <p class="card-text">Choose the movie title that matches the plot shown above. </p>
-        <p class="card-text">(If you are not sure what a picture represents, hover over the picture for a hint!)</p>
+    <!-- empty div to hold transparent background -->
+    <div id="background">
+
+    <!-- Start of card -->
+    <div class="container card m-10 bg-transparent rounded">
+
+
+
+        <h1 class="fw-bolder text-center text-white card-title display-2">Picto-Plots</h1>
+        <h2 class="text-white text-center card-text fs-5 ">The pictures below describe the 
+            <span class="fw-bold fs-3">PLOT</span>
+             of one of my favorite movies. Try to guess which movie the pictures describe.  </h2>
+        <h3 class="text-white text-center fs-5 card-text">If you are not sure what a picture represents, hover over it for a hint!</h3>
+
+
+    <!-- pictures -->
+        <div class="card-body">
+        <div class="align-content-center  justify-content-betweenrow d-grid d-flex flex-wrap gap-2 card-img-top p-3 " id="pixEl">
+
 
         <!-- title and plot on correct answer -->
-        <div class="container">
-            <h3 class="card-text text center"id="movie-title"></h3>
-             <p class="card-text" id="movie-plot"></p>
-
-
+        <div class="title-plot">
+        <h2 class="card-text text-center fw-bold fs-3 " id="movie-title"></h2>
+             <h3 class="card-text text-center fs-5 " id="movie-plot"></h3>
         </div>
-
+    </div>
         <!-- button group with movie titles -->
-        <div class="container  card-body">
-        <div class="row gap-1 d-grid d-flex flex-wrap justify-content-evenly align-content-stretch align-items-stretch" id="btnEl"></div>
-        </div>
+        <div class="container width">
+        <div class="row gap-1d-grid d-flex  justify-content-evenly align-content-stretch align-items-stretch  shadow-lg p-3 mb-5" id="btnEl"></div>
+    </div>    
+    </div>
     </div>
 
 
 </div>
-<script src="./js/script.js"></script>
+</div>
+<script src="./assets/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nlb+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
