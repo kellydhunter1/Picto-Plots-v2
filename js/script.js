@@ -7,14 +7,14 @@ let plotUrl= "";
 // array of objects with information about movie
 const moviesArr = [
     {title: "Mean Girls", plot: plotUrl, picWords: ["teen girl","group of barbies","besties","dating","mad"]},
-    // {title: "", plot: plotUrl, picWords: []},
-    // {title: "", plot: plotUrl, picWords: []},
-    // {title: "", plot: plotUrl, picWords: []},
-    // {title: "", plot: plotUrl, picWords: []},
-    // {title: "", plot: plotUrl, picWords: []},
-    // {title: "", plot: plotUrl, picWords: []},
-    // {title: "", plot: plotUrl, picWords: []},
-    // {title: "", plot: plotUrl, picWords: []},
+    {title: "Hamilton", plot: plotUrl, picWords: []},
+    {title: "Sing", plot: plotUrl, picWords: []},
+    {title: "Silver Linings Playbook", plot: plotUrl, picWords: []},
+    {title: "Next Friday", plot: plotUrl, picWords: []},
+    {title: "Pretty Woman", plot: plotUrl, picWords: []},
+    {title: "Vegas Vacation", plot: plotUrl, picWords: []},
+    {title: "LulaRich", plot: plotUrl, picWords: []},
+    {title: "Baby Boom", plot: plotUrl, picWords: []},
     {title: "Alice in Wonderland", plot: plotUrl, picWords: ["rabbit hole", "magic","tea party", "slay dragon", "goodbye"]}
 ];
 const btnEl = document.getElementById("btnEl");
@@ -27,30 +27,49 @@ const chooseMovie = function() {
         return 0.5 - Math.random()
     }) 
     console.log(moviesArr[0].title)
-    getPlot();
-    createButtons();
+    getPix();
+
 };
 
 // Create buttons with each movie title in regular order
 const createButtons = function() {
     moviesArr.forEach((movie) => {
+        // create buttons
         const movieBtn = document.createElement("button");
-        movieBtn.className = "btn btn-secondary";
+        movieBtn.className = "col-lg-2 col-md-3 col-sm-mx btn btn-secondary";
         movieBtn.setAttribute("type", "button");
         movieBtn.textContent = movie.title;
+        // create container for buttons
+        // const btnDiv = document.createElement("div");
+        // btnDiv.className = "col col-lg-4"
+        // put buttons in container and on the page
+        // btnDiv.appendChild(movieBtn);
+        // btnEl.appendChild(btnDiv);
         btnEl.appendChild(movieBtn);
     })
-}
+};
 
 // uses OMDb to get plot of movie, currently defaulted to mean girls
-const getPlot = function() { 
+const getDetails= function() { 
 let movie= moviesArr[0].title;
+const titleEl = document.getElementById("movie-title");
+titleEl.innerText = movie;
     fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${omdbKey}&t=${movie}&plot=short`)
     .then((response) => response.json())
-    .then((data) => console.log(data.Plot))
-    .then(getPix())
+    .then((data) => {
+        const plotEl = document.getElementById("movie-plot");
+        plotEl.innerText = data.Plot;
+        console.log(data.Plot);
+        
+
+
+        
+        
+    })
     .catch((error) => console.error(error.message));
 };
+
+
 // uses pix strings to search photos from pixabay
 const getPix = function() {
     let pixArr = moviesArr[0].picWords;
@@ -75,30 +94,32 @@ const getPix = function() {
                     setTimeout(function() {
                        console.log(`next pic will append after ${pic}`);
                        resolve();
-                    }, 8000);
+                    }, 5000);
                   })
             })                
             .catch((error) => console.error(error.message));
-
             }
-    
-
-
 
 };
 
 const checkAnswer = function(event) {
     let ansClick = event.target;
-    event.preventDefault;
+    console.log(ansClick);
     console.log(`${moviesArr[0].title} is in answer checker.`)
-    
+    ansClick.classList.remove("btn-secondary");
     if (ansClick.innerText == moviesArr[0].title) {
-        console.log("Right Answer!")
+        ansClick.classList.add("btn-success");
+        
+        console.log("Right Answer!");
+        getDetails();
     } else {
-        console.log("Thats Wrong!")
+        ansClick.classList.add("btn-outline-danger");
+        btnEl.classList.remove("btn-outline-danger");
+        console.log("Thats Wrong!");
     }
 }
-
+createButtons();
 chooseMovie();
+
 
 btnEl.addEventListener("click", checkAnswer); 
