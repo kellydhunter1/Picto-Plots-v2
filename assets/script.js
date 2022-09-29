@@ -2,7 +2,7 @@
 const pixKey = "17228303-ec297062a3db99e52d960db51";
 const omdbKey = "da7317ce";
 let plotUrl= "";
-
+const btnEl = document.getElementById("btnEl");
 
 // array of objects with information about movie
 const moviesArr = [
@@ -17,22 +17,18 @@ const moviesArr = [
     {title: "Baby Boom", plot: plotUrl, picWords: ["business woman",  "crying baby", "confused", "country house", "applesauce"]},
     {title: "Alice in Wonderland", plot: plotUrl, picWords: ["rabbit hole", "magic","tea party", "slay dragon", "goodbye"]}
 ];
-const btnEl = document.getElementById("btnEl");
-
-
 
 // Randomize Movie Array
-const chooseMovie = function() {
-    moviesArr.sort(function(){
-        return 0.5 - Math.random()
-    }) 
-    console.log(moviesArr[0].title)
+function chooseMovie() {
+    moviesArr.sort(function () {
+        return 0.5 - Math.random();
+    });
+    console.log(moviesArr[0].title);
     getPix();
-
-};
+}
 
 // Create buttons with each movie title in regular order
-const createButtons = function() {
+function createButtons() {
     moviesArr.forEach((movie) => {
         // create buttons
         const movieBtn = document.createElement("button");
@@ -40,43 +36,37 @@ const createButtons = function() {
         movieBtn.setAttribute("type", "button");
         movieBtn.textContent = movie.title;
         btnEl.appendChild(movieBtn);
-    })
-};
+    });
+}
 
-// uses OMDb to get plot of movie, currently defaulted to mean girls
-const getDetails= function() { 
-let movie= moviesArr[0].title;
-const titleEl = document.getElementById("movie-title");
-titleEl.innerText = movie;
+// uses OMDb to get plot of movie
+function getDetails() {
+    let movie = moviesArr[0].title;
+    const titleEl = document.getElementById("movie-title");
+    titleEl.innerText = movie;
     fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${omdbKey}&t=${movie}&plot=short`)
-    .then((response) => response.json())
-    .then((data) => {
-        const plotEl = document.getElementById("movie-plot");
-        plotEl.innerText = data.Plot;
-        console.log(data.Plot);
-        
-
-
-        
-        
-    })
-    .catch((error) => console.error(error.message));
-};
+        .then((response) => response.json())
+        .then((data) => {
+            const plotEl = document.getElementById("movie-plot");
+            plotEl.innerText = data.Plot;
+            console.log(data.Plot);
+        })
+        .catch((error) => console.error(error.message));
+}
 
 
 // uses pix strings to search photos from pixabay
-const getPix = function() {
+function getPix() {
     let pixArr = moviesArr[0].picWords;
     console.log(pixArr);
-    for(let pic of pixArr) {
-            // use API to get each picture described in array
-            fetch(`https://pixabay.com/api/?key=${pixKey}&q=${pic}`)
+    for (let pic of pixArr) {
+        // use API to get each picture described in array
+        fetch(`https://pixabay.com/api/?key=${pixKey}&q=${pic}`)
             .then((response) => response.json())
             .then((data) => {
                 // create containers for pictures
                 const pixEl = document.getElementById("pixEl");
                 const picImg = document.createElement("img");
-
                 // set attributes for pictures
                 // no idea why I can't use classname?
                 picImg.setAttribute("class", "img-thumbnail shadow-none col");
@@ -85,36 +75,39 @@ const getPix = function() {
                 picImg.setAttribute("title", pic);
                 pixEl.appendChild(picImg);
                 // short pause so pix can stay in order
-                return new Promise(function(resolve){
-                    setTimeout(function() {
-                       console.log(`next pic will append after ${pic}`);
-                       resolve();
-                    }, 18000);
-                  })
-            })                
+                return new Promise(function (resolve) {
+                    setTimeout(function () {
+                        console.log(`next pic will append after ${pic}`);
+                        resolve();
+                    }, 5000);
+                });
+            })
             .catch((error) => console.error(error.message));
-            }
+    }
 
-};
+}
 
-const checkAnswer = function(event) {
+// checks answer clicked
+function checkAnswer(event) {
     let ansClick = event.target;
     console.log(ansClick);
-    console.log(`${moviesArr[0].title} is in answer checker.`)
+    console.log(`${moviesArr[0].title} is in answer checker.`);
     ansClick.classList.remove("btn-primary");
+    // if answer is correct turn button green
     if (ansClick.innerText == moviesArr[0].title) {
         ansClick.classList.add("btn-success");
-        
         console.log("Right Answer!");
         getDetails();
+    // if answer is wrong turn button red
     } else {
         ansClick.classList.add("btn-outline-danger");
+        // blocks div from turning red
         btnEl.classList.remove("btn-outline-danger");
         console.log("Thats Wrong!");
     }
 }
+// called separately to keep movie buttons in same order every time
 createButtons();
 chooseMovie();
-
 
 btnEl.addEventListener("click", checkAnswer); 
