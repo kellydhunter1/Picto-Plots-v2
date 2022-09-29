@@ -10,7 +10,7 @@
 
 ## Usage
 
-There is no installation needed to access Picto-Plots-v2. Follow the link ADDDDDDDDDD LIIIIIINNNNKKKKKKKKKKK to access the application. 
+There is no installation needed to access Picto-Plots-v2. Follow the link [Picto-Plots-v2](https://kellydhunter1.github.io/picto-plots-v2 to access the application. 
 
 - To complete the quiz, click the movie button that the images represent. If you are correct, the button will turn green and you will see the movie title and a short description. If you are incorrect, the button will turn red. You can guess as many times needed.
 
