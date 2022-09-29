@@ -19,6 +19,12 @@ There is no installation needed to access Picto-Plots-v2. Follow the link [Picto
 
 <img width="1440" alt="Screen Shot 2022-09-28 at 9 17 45 PM" src="https://user-images.githubusercontent.com/81445500/192921185-752a424a-f524-48d9-aba4-b355f09686b2.png">
 
+## Furute Updates
+
+- add movie poster with plot description
+- add 'next' button that advances to the next movie
+- improve UI so images appear in chronological order based on movie plot (this was attempted and isn't always reliable)
+
 ## Credits
 Created by Kelly Hunter
 [github.com/kellydhunter1](https://github.com/kellydhunter1)
