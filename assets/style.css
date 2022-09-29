@@ -1,20 +1,16 @@
 body{
 font-family: sans-serif;
-background-attachment: scroll;
-/* background-repeat: repeat-x; */
-background-position: top;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center bottom;
+background-attachment: fixed;
 background-image: url("./background.jpg");
 }
 
-#btnEl {
-    background-color: rgba(25, 25, 120)
+.card  {
+    background-color: rgba(120, 144, 174, 0.4);
 }
 
-#pixEl, #movie-plot {
-    background-color: rgba(195, 223, 248);
-}
-
-.title-plot {
-    color: rgb(30, 79, 30);
-}
-
+/* .card-title, .card-text {
+    color: rgb(28, 44, 107) !important
+} */

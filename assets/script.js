@@ -7,14 +7,14 @@ let plotUrl= "";
 // array of objects with information about movie
 const moviesArr = [
     {title: "Mean Girls", plot: plotUrl, picWords: ["teen girl","group of barbies","besties","dating","mad"]},
-    {title: "Hamilton", plot: plotUrl, picWords: []},
-    {title: "Sing", plot: plotUrl, picWords: []},
-    {title: "Silver Linings Playbook", plot: plotUrl, picWords: []},
-    {title: "Next Friday", plot: plotUrl, picWords: []},
-    {title: "Pretty Woman", plot: plotUrl, picWords: []},
-    {title: "Vegas Vacation", plot: plotUrl, picWords: []},
-    {title: "LulaRich", plot: plotUrl, picWords: []},
-    {title: "Baby Boom", plot: plotUrl, picWords: []},
+    {title: "Harry Potter & Chamber of Secrets", plot: plotUrl, picWords: ["magic wand", "old diary", "petrified", "secret door", "black snake"]},
+    {title: "Cast Away", plot: plotUrl, picWords: ["jetliner", "plane crash", "tropical island","man despair", "sea-rescue"]},
+    {title: "Silver Linings Playbook", plot: plotUrl, picWords: ["punches", "medicine", "dinner date", "dance pair", "fall in love"]},
+    {title: "Next Friday", plot: plotUrl, picWords: ["scary man", "run away", "suburbs", "scary men", "lots of cash"]},
+    {title: "Pretty Woman", plot: plotUrl, picWords: ["Hollywood", " escort", "date nights", "love", "girlfriend"]},
+    {title: "Vegas Vacation", plot: plotUrl, picWords: [ "family trip", "casinos", "empty pockets","expensive cars", "win money"]},
+    {title: "Just Go With It", plot: plotUrl, picWords: ["male doctor", "cute girlfriend", "fake wedding ring", "Hawaiian vacation", "real husband and wife"]},
+    {title: "Baby Boom", plot: plotUrl, picWords: ["business woman",  "crying baby", "confused", "country house", "applesauce"]},
     {title: "Alice in Wonderland", plot: plotUrl, picWords: ["rabbit hole", "magic","tea party", "slay dragon", "goodbye"]}
 ];
 const btnEl = document.getElementById("btnEl");
@@ -36,7 +36,7 @@ const createButtons = function() {
     moviesArr.forEach((movie) => {
         // create buttons
         const movieBtn = document.createElement("button");
-        movieBtn.className = "col-lg-2 col-md-3 col-sm-5 btn btn-secondary shadow p-1 m-1 rounded";
+        movieBtn.className = "col-lg-2 col-md-3 col-sm-5 btn text-white btn-primary shadow p-1 m-1 rounded";
         movieBtn.setAttribute("type", "button");
         movieBtn.textContent = movie.title;
         btnEl.appendChild(movieBtn);
@@ -89,7 +89,7 @@ const getPix = function() {
                     setTimeout(function() {
                        console.log(`next pic will append after ${pic}`);
                        resolve();
-                    }, 5000);
+                    }, 18000);
                   })
             })                
             .catch((error) => console.error(error.message));
@@ -101,7 +101,7 @@ const checkAnswer = function(event) {
     let ansClick = event.target;
     console.log(ansClick);
     console.log(`${moviesArr[0].title} is in answer checker.`)
-    ansClick.classList.remove("btn-secondary");
+    ansClick.classList.remove("btn-primary");
     if (ansClick.innerText == moviesArr[0].title) {
         ansClick.classList.add("btn-success");
         
